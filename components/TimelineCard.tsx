@@ -20,21 +20,21 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
   index,
   className = ''
 }) => {
-  // Theme styling configurations
+  // Theme styling configurations with enhanced glow effects on hover
   const themes = {
     orange: {
       bg: 'bg-[#FDF5F2]',
-      border: 'border-[#F8DFD4]',
+      border: 'border-[#F8DFD4] group-hover:border-[#E28362] group-hover:shadow-[0_0_15px_rgba(208,83,47,0.12)]',
       numText: 'text-[#D0532F]'
     },
     blue: {
       bg: 'bg-[#F3F6FD]',
-      border: 'border-[#E5EBF9]',
+      border: 'border-[#E5EBF9] group-hover:border-[#8EADF0] group-hover:shadow-[0_0_15px_rgba(47,92,196,0.12)]',
       numText: 'text-[#2F5CC4]'
     },
     purple: {
       bg: 'bg-[#F7F3FD]',
-      border: 'border-[#EEE6FA]',
+      border: 'border-[#EEE6FA] group-hover:border-[#C9B3F4] group-hover:shadow-[0_0_15px_rgba(123,56,223,0.12)]',
       numText: 'text-[#7B38DF]'
     }
   }
@@ -53,17 +53,18 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({
       className={`relative z-20 hover:z-40 w-[280px] md:w-[296px] flex-shrink-0 bg-white rounded-[26px] p-[12px] md:p-[14px]
                  shadow-[0_12px_36px_rgba(0,0,0,0.05),0_2px_8px_rgba(0,0,0,0.02)]
                  hover:shadow-[0_24px_48px_rgba(0,0,0,0.1),0_4px_16px_rgba(0,0,0,0.04)]
-                 transition-all duration-300 ease-out hover:-translate-y-1.5 cursor-pointer
+                 transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.03]
+                 active:scale-[0.97] active:translate-y-0 cursor-pointer group
                  ${tiltClasses[tilt]} ${className}`}
       data-card-index={index}
     >
-      {/* Absolute Push Pin aligned exactly at top-center */}
-      <div className="absolute -top-[21px] left-1/2 -translate-x-1/2 z-30 pointer-events-none pin-anchor">
+      {/* Absolute Push Pin aligned exactly at top-center with custom hover wiggle animation */}
+      <div className="absolute -top-[21px] left-1/2 -translate-x-1/2 z-30 pointer-events-none pin-anchor animate-pin-wiggle">
         <PushPin color={color} />
       </div>
 
       {/* Inner Notebook Note */}
-      <div className={`w-full h-full rounded-[18px] ${selectedTheme.bg} border ${selectedTheme.border} p-4 md:p-5 pb-5 md:pb-6 text-left`}>
+      <div className={`w-full h-full rounded-[18px] ${selectedTheme.bg} border ${selectedTheme.border} transition-all duration-300 ease-out p-4 md:p-5 pb-5 md:pb-6 text-left`}>
         {/* Step Number in Cursive Handwriting */}
         <div className={`font-handwritten text-[28px] md:text-[32px] font-bold leading-none mb-1 ${selectedTheme.numText}`}>
           {id}

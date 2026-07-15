@@ -53,7 +53,7 @@ export default function Home() {
       title: 'Pricing',
       description: 'Get started with our flexible plans tailored for teams of all sizes',
       color: 'orange' as const,
-      tilt: 'none' as const
+      tilt: 'left' as const
     }
   ]
 
@@ -69,7 +69,7 @@ export default function Home() {
         Using a fixed-height relative container to precisely align and stagger cards
         exactly matching the reference image.
       */}
-      <div className="hidden md:block relative w-[600px] h-[1220px] z-20">
+      <div className="hidden md:block relative w-[600px] h-[1300px] z-20">
         <div className="absolute top-[0px] left-0">
           <TimelineCard {...cards[0]} index={0} />
         </div>
@@ -88,28 +88,22 @@ export default function Home() {
         <div className="absolute top-[840px] right-0">
           <TimelineCard {...cards[5]} index={5} />
         </div>
-        {/* Card 07 - cropped perfectly at the bottom */}
-        <div className="absolute top-[1020px] left-[150px] w-[300px] h-[65px] overflow-hidden">
-          <TimelineCard {...cards[6]} index={6} className="absolute top-0 left-0" />
+        {/* Card 07 - fully visible, centered horizontally */}
+        <div className="absolute top-[1020px] left-[152px]">
+          <TimelineCard {...cards[6]} index={6} />
         </div>
       </div>
 
       {/*
         Mobile Layout:
         Responsive clean vertical list with alternating tilts and dynamic S-curve connecting them.
+        Alternates shifting left and right slightly to create a playful zigzag that the connector curve beautifully follows.
       */}
-      <div className="block md:hidden w-full max-w-[320px] flex flex-col gap-16 relative z-20">
+      <div className="block md:hidden w-full max-w-[320px] flex flex-col gap-16 relative z-20 overflow-x-hidden py-4">
         {cards.map((card, idx) => {
-          const isLast = idx === cards.length - 1
-          if (isLast) {
-            return (
-              <div key={card.id} className="w-full h-[65px] overflow-hidden relative">
-                <TimelineCard {...card} index={idx} className="absolute top-0 left-1/2 -translate-x-1/2" />
-              </div>
-            )
-          }
+          const mobileShift = idx % 2 === 0 ? '-translate-x-4' : 'translate-x-4'
           return (
-            <div key={card.id} className="w-full flex justify-center">
+            <div key={card.id} className={`w-full flex justify-center transform ${mobileShift}`}>
               <TimelineCard {...card} index={idx} />
             </div>
           )
