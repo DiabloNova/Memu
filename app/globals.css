@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-caveat: 'Caveat', cursive;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6f6;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* Notebook lined paper pattern */
+.notebook-bg {
+  background-color: #f6f6f6;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  background-size: 100% 48px; /* Perfectly sized matching lines */
+}
+
+/* Floating animation for subtle pins and cards */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Transitions for hover effects */
+.hover-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
