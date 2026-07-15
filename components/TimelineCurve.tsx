@@ -22,13 +22,16 @@ export const TimelineCurve: React.FC = () => {
     pinElements.forEach((el) => {
       const pinRect = el.getBoundingClientRect()
 
-      // Calculate center coordinates of the pin head relative to the container
-      // The pin head is roughly centered in the 44px wide / 48px high SVG.
-      // We want the curve to pass through the center of the pin head (y ~ 15px down from pin's top).
-      const x = pinRect.left + pinRect.width / 2 - containerRect.left
-      const y = pinRect.top + 15 - containerRect.top
+      // Only include elements that are currently visible (non-zero size)
+      if (pinRect.width > 0 && pinRect.height > 0) {
+        // Calculate center coordinates of the pin head relative to the container
+        // The pin head is roughly centered in the 44px wide / 48px high SVG.
+        // We want the curve to pass through the center of the pin head (y ~ 15px down from pin's top).
+        const x = pinRect.left + pinRect.width / 2 - containerRect.left
+        const y = pinRect.top + 15 - containerRect.top
 
-      newPoints.push({ x, y })
+        newPoints.push({ x, y })
+      }
     })
 
     setPoints(newPoints)
